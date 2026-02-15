@@ -1,6 +1,5 @@
 package core;
 
-import com.sun.tools.javac.Main;
 import core.display.GameDisplay;
 import core.display.MainMenuDisplay;
 import core.input.GameInput;
@@ -30,6 +29,9 @@ public class Game {
     // Logs
     private Log log = Log.getInstance();
     private CombatLog combatLog = CombatLog.getInstance();
+
+    // Save
+    private Save saver = new Save();
 
     public Game() {
         this.createMainMenuInstance();
