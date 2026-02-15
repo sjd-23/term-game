@@ -30,9 +30,6 @@ public class Game {
     private Log log = Log.getInstance();
     private CombatLog combatLog = CombatLog.getInstance();
 
-    // Save
-    private Save saver = new Save();
-
     public Game() {
         this.createMainMenuInstance();
     }
