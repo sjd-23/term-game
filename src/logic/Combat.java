@@ -1,8 +1,6 @@
 package logic;
 
-import core.CombatLog;
 import core.Display;
-import core.Log;
 import entity.Entity;
 import util.Ansi;
 import util.Consts;

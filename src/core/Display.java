@@ -2,6 +2,8 @@ package core;
 
 import entity.Entity;
 import logic.Action;
+import logic.CombatLog;
+import logic.Log;
 import logic.Player;
 import util.Ansi;
 

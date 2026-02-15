@@ -1,5 +1,6 @@
 package core;
 
+import logic.Log;
 import util.Ansi;
 
 public class Game {

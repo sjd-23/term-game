@@ -1,24 +1,22 @@
-package core;
+package logic;
 
 import entity.Entity;
-import logic.Action;
-import logic.Player;
 import util.Ansi;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Log {
-    private static Log log = null;
+public class CombatLog {
+    private static CombatLog log = null;
     private List<String> events = new ArrayList<>();
-    private final int maxSize = 8;
+    private final int maxSize = 4;
 
-    public Log() {}
+    public CombatLog() {}
 
-    public static synchronized Log getInstance() {
-        if (log == null) log = new Log();
+    public static synchronized CombatLog getInstance() {
+        if (log == null) log = new CombatLog();
         return log;
-     }
+    }
 
     public void add(String message) {
         this.events.add(message);
