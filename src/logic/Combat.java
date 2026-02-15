@@ -1,6 +1,6 @@
 package logic;
 
-import core.Display;
+import core.display.GameDisplay;
 import entity.Entity;
 import util.Ansi;
 import util.Consts;
@@ -8,7 +8,7 @@ import util.Consts;
 public class Combat {
     private Log log = Log.getInstance();
     private CombatLog combatLog = CombatLog.getInstance();
-    private Display display;
+    private GameDisplay gameDisplay;
     Player player;
     Entity enemy;
     private boolean isActive = false;
@@ -18,8 +18,8 @@ public class Combat {
 
     public Combat() {}
 
-    public void initializeDisplay() {
-        this.display = Display.getInstance();
+    public void setGameDisplay(GameDisplay gameDisplay) {
+        this.gameDisplay = gameDisplay;
     }
 
     public boolean isActive() { return this.isActive; }
@@ -37,14 +37,14 @@ public class Combat {
         this.turnNumber += 1;
 
         this.combatLog.add(Ansi.ITALIC + Ansi.BOLD + "TURN #" + this.turnNumber + Ansi.RESET);
-        display.print();
+        gameDisplay.print();
         Consts.attackDelay();
 
         if (this.player.getSpeed() >= this.enemy.getSpeed()) {
             this.combatLog.logPlayerAttack(this.player, this.playerAction);
             this.enemy.takeDamage(this.playerAction.getDamage());
 
-            display.print();
+            gameDisplay.print();
             Consts.attackDelay();
 
             this.combatLog.logEnemyAttack(this.enemy, this.enemyAction);
@@ -54,14 +54,14 @@ public class Combat {
             this.combatLog.logEnemyAttack(this.enemy, this.enemyAction);
             this.player.takeDamage(this.enemyAction.getDamage());
 
-            display.print();
+            gameDisplay.print();
             Consts.attackDelay();
 
             this.combatLog.logPlayerAttack(this.player, this.playerAction);
             this.enemy.takeDamage(this.playerAction.getDamage());
 
         }
-        display.print();
+        gameDisplay.print();
         Consts.attackDelay();
 
         this.enemyAction = null;

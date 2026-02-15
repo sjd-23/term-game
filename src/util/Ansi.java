@@ -37,4 +37,14 @@ public final class Ansi {
         System.out.print(Ansi.CLEAR);
         System.out.flush();
     }
+
+    public static String createMainMenuOptionString(String input) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Ansi.BOLD + Ansi.YELLOW).append(input.charAt(0));
+        sb.append(Ansi.RESET);
+        for (int i = 1; i < input.length(); i++) {
+            sb.append(input.charAt(i));
+        }
+        return sb.toString();
+    }
 }

@@ -1,5 +1,6 @@
-package core;
+package core.display;
 
+import core.management.GameManager;
 import entity.Entity;
 import logic.Action;
 import logic.CombatLog;
@@ -9,23 +10,14 @@ import util.Ansi;
 
 import java.util.Objects;
 
-public class Display {
-    private static Display display = null;
-    Manager manager;
+public class GameDisplay {
+    private static GameDisplay gameDisplay = null;
+    GameManager gameManager;
     Log log = Log.getInstance();
     CombatLog combatLog = CombatLog.getInstance();
 
-    public Display(Manager manager) {
-        this.manager = manager;
-    }
-
-    public static synchronized Display getInstance(Manager manager) {
-        if (display == null) display = new Display(manager);
-        return display;
-    }
-
-    public static synchronized Display getInstance() {
-        return display;
+    public GameDisplay(GameManager gameManager) {
+        this.gameManager = gameManager;
     }
 
     public void print() {
@@ -34,13 +26,13 @@ public class Display {
 
         this.printLog();
 
-        if (this.manager.isCombatActive()) {
+        if (this.gameManager.isCombatActive()) {
             this.printCombatPane();
             this.printCombatLog();
             this.printPlayerSeperatorPane();
             this.printPlayerVitalsPane();
             this.printCombatMenuPane();
-        } else if (this.manager.isFloorConcluded()) {
+        } else if (this.gameManager.isFloorConcluded()) {
             this.printConclusionPane();
             this.printPlayerSeperatorPane();
             this.printPlayerVitalsPane();
@@ -49,12 +41,12 @@ public class Display {
     }
 
     private void printHeaderPane() {
-        System.out.println(Ansi.BLACK + Ansi.BG_WHITE + "Floor No. " + this.manager.getFloorNumber() + Ansi.RESET + "\n");
+        System.out.println(Ansi.BLACK + Ansi.BG_WHITE + "Floor No. " + this.gameManager.getFloorNumber() + Ansi.RESET + "\n");
     }
 
     private void printCombatPane() {
-        Entity enemy = this.manager.getCombat().getEnemy();
-        Action action = this.manager.getCombat().getEnemyAction();
+        Entity enemy = this.gameManager.getCombat().getEnemy();
+        Action action = this.gameManager.getCombat().getEnemyAction();
 
         System.out.println(Ansi.GRAY + Ansi.ITALIC + enemy.getFlavorDescription() + Ansi.RESET);
 
@@ -82,7 +74,7 @@ public class Display {
     }
 
     private void printCombatMenuPane() {
-        if (this.manager.isAttackMenuOpened())  {
+        if (this.gameManager.isAttackMenuOpened())  {
             System.out.println(Ansi.YELLOW + "a." + Ansi.RESET + " Attack with:");
             this.printAttackOptions();
         } else {
@@ -92,20 +84,20 @@ public class Display {
     }
 
     private void printPlayerVitalsPane() {
-        Player player = this.manager.getPlayer();
+        Player player = this.gameManager.getPlayer();
         System.out.print(Ansi.BG_DARK_RED_256 +  "Health" + Ansi.RESET + " ");
         System.out.println(Ansi.BG_DARKER_RED_256 + player.getHealth() + "/" + player.getMaxHealth() + Ansi.RESET + "\n");
     }
 
     private void printAttackOptions() {
-        if (this.manager.getPlayer().getInventory().getSize() == 0) {
+        if (this.gameManager.getPlayer().getInventory().getSize() == 0) {
             System.out.println(Ansi.CYAN + "     No weapons available." + Ansi.RESET);
             return;
         }
 
         int selectionChoice = 1;
-        for (int i = 0; i < this.manager.getPlayer().getInventory().getSize(); i++) {
-            System.out.println(Ansi.CYAN + "     a" + selectionChoice + ". " + Ansi.RESET + this.manager.getPlayer().getInventory().getList().get(i).getName());
+        for (int i = 0; i < this.gameManager.getPlayer().getInventory().getSize(); i++) {
+            System.out.println(Ansi.CYAN + "     a" + selectionChoice + ". " + Ansi.RESET + this.gameManager.getPlayer().getInventory().getList().get(i).getName());
             selectionChoice += 1;
         }
     }

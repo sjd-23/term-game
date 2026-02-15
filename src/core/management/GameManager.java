@@ -1,5 +1,6 @@
-package core;
+package core.management;
 
+import core.display.GameDisplay;
 import entity.Entity;
 import entity.entities.Goblin;
 import item.Item;
@@ -8,7 +9,7 @@ import logic.Action;
 import logic.Player;
 import logic.Combat;
 
-public class Manager {
+public class GameManager {
     private int floorNumber;
     private boolean isFloorConcluded = false;
     private boolean isAttackMenuOpened = false;
@@ -18,9 +19,13 @@ public class Manager {
     Player player = new Player();
     Combat combat = new Combat();
 
-    public Manager() {
+    public GameManager() {
         this.floorNumber = 0;
         this.player.getInventory().addItem(new IronSword());
+    }
+
+    public void setCombatGameDisplay(GameDisplay gameDisplay) {
+        this.combat.setGameDisplay(gameDisplay);
     }
 
     public int getFloorNumber() { return this.floorNumber; }
