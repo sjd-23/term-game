@@ -1,7 +1,11 @@
 package core.management;
 
-public class MainMenuManager {
-    public MainMenuManager() {}
+import core.Manager;
+
+public class MainMenuManager extends Manager {
+    public MainMenuManager() {
+        super();
+    }
 
     public int takeAction(String command) {
         switch (command) {

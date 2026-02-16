@@ -1,7 +1,7 @@
 package core.display;
 
 import core.management.GameManager;
-import entity.Entity;
+import world.entity.Entity;
 import logic.Action;
 import logic.CombatLog;
 import logic.Log;

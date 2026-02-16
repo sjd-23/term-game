@@ -1,7 +1,7 @@
 package logic;
 
 import core.display.GameDisplay;
-import entity.Entity;
+import world.entity.Entity;
 import util.Ansi;
 import util.Consts;
 

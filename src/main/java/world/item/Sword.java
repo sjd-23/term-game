@@ -1,4 +1,4 @@
-package item;
+package world.item;
 
 public abstract class Sword extends Item {
     public Sword(String name, int attackValue) {

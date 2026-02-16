@@ -1,6 +1,6 @@
-package entity.entities;
+package world.entity.entities;
 
-import entity.Entity;
+import world.entity.Entity;
 import util.Ansi;
 
 public class Goblin extends Entity {

@@ -1,7 +1,7 @@
 package util;
 
 public final class Consts {
-    public static double gameVersion = 0.01;
+    public static String gameVersion = "infdev";
     public static String versionSplash = "The horrors of the shade...";
 
     public static void attackDelay() {

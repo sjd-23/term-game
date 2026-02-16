@@ -1,6 +1,6 @@
 package logic;
 
-import item.Item;
+import world.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;

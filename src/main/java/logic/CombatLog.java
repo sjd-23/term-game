@@ -1,6 +1,6 @@
 package logic;
 
-import entity.Entity;
+import world.entity.Entity;
 import util.Ansi;
 
 import java.util.ArrayList;

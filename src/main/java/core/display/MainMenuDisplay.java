@@ -24,15 +24,15 @@ public class MainMenuDisplay {
                            "Untitled Terminal Game" +
                            Ansi.RESET + " " +
                            Ansi.BLACK + Ansi.BG_WHITE +
-                           "v" + Consts.gameVersion +
+                           Consts.gameVersion +
                            Ansi.RESET);
         System.out.println(Ansi.PURPLE + Ansi.ITALIC + Consts.versionSplash);
         System.out.println(Ansi.RESET);
     }
 
     private void printOptions() {
-        System.out.println(Ansi.GRAY + "p) " + Ansi.createMainMenuOptionString("Play") + Ansi.RESET);
-        System.out.println(Ansi.GRAY + "q) " + Ansi.createMainMenuOptionString("Quit"));
+        System.out.println(Ansi.GRAY + "p. " + Ansi.createMainMenuOptionString("Play") + Ansi.RESET);
+        System.out.println(Ansi.GRAY + "q. " + Ansi.createMainMenuOptionString("Quit"));
         System.out.println(Ansi.RESET);
     }
 }

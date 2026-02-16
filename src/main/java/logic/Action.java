@@ -1,6 +1,6 @@
 package logic;
 
-import item.Item;
+import world.item.Item;
 
 public class Action {
     private String type;

@@ -1,6 +1,6 @@
-package item.items;
+package world.item.items;
 
-import item.Sword;
+import world.item.Sword;
 
 public class IronSword extends Sword {
     public IronSword() {

@@ -1,7 +1,7 @@
 package logic;
 
-import entity.Entity;
-import item.Item;
+import world.entity.Entity;
+import world.item.Item;
 
 public class Intelligence {
     public Intelligence() {}

@@ -1,25 +1,27 @@
 package core.management;
 
+import core.Manager;
 import core.display.GameDisplay;
-import entity.Entity;
-import entity.entities.Goblin;
-import item.Item;
-import item.items.IronSword;
+import world.entity.Entity;
+import world.entity.entities.Goblin;
+import world.item.Item;
+import world.item.items.IronSword;
 import logic.Action;
 import logic.Player;
 import logic.Combat;
 
-public class GameManager {
+public class GameManager extends Manager {
     private int floorNumber;
     private boolean isFloorConcluded = false;
     private boolean isAttackMenuOpened = false;
     private boolean isActionTaken = false;
 
-    Entity currentEnemy;
-    Player player = new Player();
-    Combat combat = new Combat();
+    private Entity currentEnemy;
+    private Player player = new Player();
+    private Combat combat = new Combat();
 
     public GameManager() {
+        super();
         this.floorNumber = 0;
         this.player.getInventory().addItem(new IronSword());
     }
@@ -44,7 +46,9 @@ public class GameManager {
 
     public void takeTurn() {
         if (this.combat.isActive() && !this.combat.isEnemyDead() && this.isActionTaken) {
+            super.isInputLocked = true;
             this.combat.takeTurn();
+            super.isInputLocked = false;
         }
 
         if (this.combat.isActive() && this.combat.isEnemyDead()) {

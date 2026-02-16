@@ -1,4 +1,4 @@
-package item;
+package world.item;
 
 public abstract class Item {
     String name;

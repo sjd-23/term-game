@@ -2,8 +2,6 @@ package core;
 
 import core.display.GameDisplay;
 import core.display.MainMenuDisplay;
-import core.input.GameInput;
-import core.input.MainMenuInput;
 import core.management.GameManager;
 import core.management.MainMenuManager;
 import logic.CombatLog;
@@ -11,8 +9,14 @@ import logic.Log;
 import util.Ansi;
 
 public class Game {
-    private boolean isRunning = true;
-    GameState gameState = new GameState();
+    private boolean isRunning = true; // Master Switch
+
+    // Game State
+    private enum STATES {
+        MAIN_MENU,
+        GAME,
+    }
+    private STATES currentState = STATES.MAIN_MENU;
 
     // Managers
     private GameManager gameManager;
@@ -22,9 +26,7 @@ public class Game {
     private GameDisplay gameDisplay;
     private MainMenuDisplay mainMenuDisplay;
 
-    // Inputs
-    private GameInput gameInput;
-    private MainMenuInput mainMenuInput;
+    private Input input = new Input();
 
     // Logs
     private Log log = Log.getInstance();
@@ -36,7 +38,7 @@ public class Game {
 
     public void run() {
         while (this.isRunning) {
-            switch (this.gameState.currentState) {
+            switch (this.currentState) {
                 case GAME:
                     this.gameLoop();
                     break;
@@ -50,15 +52,15 @@ public class Game {
     private void createMainMenuInstance() {
         // creation
         this.mainMenuManager = new MainMenuManager();
-        this.mainMenuDisplay = new MainMenuDisplay();
-        this.mainMenuInput = new MainMenuInput(this.mainMenuManager);
+        this.mainMenuDisplay = MainMenuDisplay.getInstance();
+        this.input.setManager(this.mainMenuManager);
     }
 
     private void createGameInstance() {
         // creation
         this.gameManager = new GameManager();
         this.gameDisplay = new GameDisplay(this.gameManager);
-        this.gameInput = new GameInput(this.gameManager);
+        this.input.setManager(this.gameManager);
 
         // reset logs
         this.log.getList().clear();
@@ -72,20 +74,20 @@ public class Game {
 
     private void mainMenuLoop() {
         this.mainMenuDisplay.print();
-        int inputResult = this.mainMenuInput.handle();
+        int inputResult = this.input.listen();
         if (inputResult == 0) this.isRunning = false;
         else if (inputResult == 1) {
             this.createGameInstance();
-            this.gameState.currentState = GameState.GAME_STATES.GAME;
+            this.currentState = STATES.GAME;
         }
     }
 
     private void gameLoop() {
         this.gameManager.prepareTurn();
         this.gameDisplay.print();
-        if (this.gameInput.handle() == 0) {
+        if (this.input.listen() == 0) {
             this.createMainMenuInstance();
-            this.gameState.currentState = GameState.GAME_STATES.MAIN_MENU;
+            this.currentState = STATES.MAIN_MENU;
         }
         if (this.gameManager.isActionTaken()) this.gameManager.takeTurn();
     }
